@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "238642725453",
+    "firebase_url": "https://yogaflutter.firebaseio.com",
+    "project_id": "yogaflutter",
+    "storage_bucket": "yogaflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238642725453:android:aee51913973af8b49cd204",
+        "android_client_info": {
+          "package_name": "com.andrea.yogaflutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "238642725453-mpduhau5nkom3nmtnvj3nikj5pll3nq4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvVN9EsY__2ytSZQofaNEV1ux34RL6dfg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "238642725453-mpduhau5nkom3nmtnvj3nikj5pll3nq4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
