@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yogaflutter/models/lesson.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
+/* 
 
  class PageChooseInstructor extends StatelessWidget {
     final Lesson lesson;
@@ -135,3 +135,5 @@ class InstructorCard extends StatelessWidget {
     );
   }
 } 
+
+*/ 
