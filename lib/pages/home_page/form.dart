@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogaflutter/pages/second_page/tipi_di_yoga.dart';
 import 'package:yogaflutter/models/lesson.dart';
+import 'package:flutter/services.dart';
 
 class MyCustomForm extends StatefulWidget {
   @override
@@ -8,6 +9,9 @@ class MyCustomForm extends StatefulWidget {
     return MyCustomFormState();
   }
 }
+
+const MINIMO_CAP_MILANO = 20121;
+const MASSIMO_CAP_MILANO = 20162;
 
 class MyCustomFormState extends State<MyCustomForm> {
   // Create a global key that uniquely identifies the Form widget
@@ -25,14 +29,20 @@ class MyCustomFormState extends State<MyCustomForm> {
       child: Column(
         children: <Widget>[
           TextFormField(
-            decoration: InputDecoration(labelText: 'Inserisci il tuo CAP'),
+            inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              labelText: 'Inserisci il tuo CAP'),
             style: new TextStyle(
               fontSize: 18.0,
               color: Colors.black,
             ),
             // The validator receives the text that the user has entered.
             validator: (value) {
+              var v = num.tryParse(value);
               if (value.isEmpty) {
+                return 'Perfavore inserisci un CAP';
+              } else if (v < MINIMO_CAP_MILANO || v > MASSIMO_CAP_MILANO) {
                 return 'Perfavore inserisci un CAP valido';
               }
               return null;

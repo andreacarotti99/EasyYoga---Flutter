@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 
-/* class PageChooseInstructor extends StatelessWidget {
+ class PageChooseInstructor extends StatelessWidget {
     final Lesson lesson;
     PageChooseInstructor({Key key, @required this.lesson}) : super (key: key);
 
@@ -134,4 +134,4 @@ class InstructorCard extends StatelessWidget {
       ),
     );
   }
-} */
+} 
