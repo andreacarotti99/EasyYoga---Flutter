@@ -7,24 +7,24 @@ class PageChooseInstructor extends StatelessWidget {
   final Lesson lesson;
   PageChooseInstructor({Key key, @required this.lesson}) : super (key: key);
 
-  final PageController ctrl = PageController();
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: FirestoreSlideshow()    
+    return MaterialApp(
+      home: new Scaffold(
+        body: FirestoreSlideshow()    
+      ),
     );
   }
 }
 
 class FirestoreSlideshow extends StatefulWidget {
-  @override
-  _FirestoreSlideshowState createState() => _FirestoreSlideshowState();
+   createState() => FirestoreSlideshowState();
 }
 
-class _FirestoreSlideshowState extends State<FirestoreSlideshow> {
+class FirestoreSlideshowState extends State<FirestoreSlideshow> {
   final PageController ctrl = PageController(viewportFraction: 0.8); //to view not 100% but 80% of the screen
   final Firestore db = Firestore.instance;
-  Stream slides; //this is to interact with the database
+  Stream slides; //this is to interact with the db
   String activeTag = 'favorites';
   int currentPage = 0;
 
@@ -50,7 +50,7 @@ class _FirestoreSlideshowState extends State<FirestoreSlideshow> {
         List slideList = snap.data.toList();
         return PageView.builder( 
         controller: ctrl,
-        itemCount: slideList.length +1,
+        itemCount: slideList.length + 1,
         itemBuilder: (context, int currentIdx) {
           if (currentIdx == 0) {
             return _buildTagPage();
@@ -122,8 +122,6 @@ class _FirestoreSlideshowState extends State<FirestoreSlideshow> {
   Color color = tag == activeTag ? Colors.purple : Colors.white;
   return FlatButton(color: color, child: Text('#$tag'), onPressed: () => _queryDb(tag: tag));
   }
-  
-
 }
 
 

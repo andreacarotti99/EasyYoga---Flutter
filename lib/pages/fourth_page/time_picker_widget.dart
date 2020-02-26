@@ -45,7 +45,7 @@ class TimePickerButtonState extends State<TimePickerButton> {
                         _time =
                         '${time.hour} : ${time.minute} : ${time.second}';
                         setState(() {});
-                        lesson.time = _time;
+                        //lesson.time = _time;
                       },
                       currentTime: DateTime.now(),
                       locale: LocaleType.it
