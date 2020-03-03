@@ -16,4 +16,14 @@ class Lesson {
     this.instructor,
     this.cap,
   );
+
+  Map<String, dynamic> toJson() => {
+    'duration': duration,
+    'attendees': attendees,
+    'typeofyoga': typeofyoga,
+    'day': day,
+    'time': time,
+    'instructor': instructor,
+    'cap': cap,
+  };
 }

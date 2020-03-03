@@ -5,20 +5,28 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:yogaflutter/pages/fourth_page/time_picker_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
- 
+import 'package:yogaflutter/pages/fourth_page/time_ui.dart'; 
 
+
+class GetAppointments {
+  getDailyAppointments(String formattedDay) {
+    return Firestore.instance
+    .collection('appointments')
+    .where('data', isEqualTo: formattedDay)
+    .getDocuments();
+  }
+}
 
 class PagePickDate extends StatelessWidget {
     final Lesson lesson;
     PagePickDate({Key key, @required this.lesson}) : super (key: key);
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(backgroundColor: Colors.indigo[400],),
       body: new Center(
-        child: new CalendarPage(lesson: lesson)
-      )
+          child: new CalendarPage(lesson: lesson),
+      ),
     );
   }
 }
@@ -26,22 +34,47 @@ class PagePickDate extends StatelessWidget {
 class CalendarPage extends StatefulWidget {
   final Lesson lesson;
   CalendarPage({Key key, @required this.lesson}) : super (key: key);
-
   @override
   _CalendarPageState createState() => _CalendarPageState();
 }
+
 
 class _CalendarPageState extends State<CalendarPage> {
   CalendarController _controller;
   Lesson lesson;
   _CalendarPageState({this.lesson});
-
+  bool dailyAppointmentsFlag = false;
+  var appointments;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _controller = CalendarController();
+    var today = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    GetAppointments().getDailyAppointments(today).then((QuerySnapshot docs) {
+      if(docs.documents.isNotEmpty) {
+        dailyAppointmentsFlag = true;
+        appointments = docs.documents[0].data;
+      }
+      else {
+        dailyAppointmentsFlag = false;
+        appointments = [];
+      }
+    });
+  }
+
+  Future<void> checkAvailability(String day) async {
+    await setState((){
+      GetAppointments().getDailyAppointments(day).then((QuerySnapshot docs) {
+        if(docs.documents.isNotEmpty) {
+          dailyAppointmentsFlag = true;
+          appointments = docs.documents[0].data;
+        }
+        else {
+          dailyAppointmentsFlag = false;
+        }
+      });
+    });
   }
   
   @override
@@ -52,7 +85,8 @@ class _CalendarPageState extends State<CalendarPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             TableCalendar(
-              initialCalendarFormat: CalendarFormat.twoWeeks,
+              initialCalendarFormat: CalendarFormat.week,
+              availableCalendarFormats: const {CalendarFormat.week : 'Week'},
               calendarStyle: CalendarStyle(
                 todayColor: Colors.deepPurple,
                 selectedColor: Theme.of(context).primaryColor,
@@ -67,11 +101,21 @@ class _CalendarPageState extends State<CalendarPage> {
                 formatButtonShowsNext: false,
               ),
               startingDayOfWeek: StartingDayOfWeek.monday,
-              onDaySelected: (date, events) { //se seleziono una data allora succede questo
-                print(date.toIso8601String());
-                String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(date);
+              onDaySelected: (date, events) { 
+
+                String formattedDay = DateFormat('yyyy-MM-dd').format(date);
+                print(formattedDay);
                 //lesson.day = formattedDate;
-                print(formattedDate);
+                checkAvailability(formattedDay);                
+
+                dailyAppointmentsFlag ? print(appointments['ora']) : print('Questo giorno non ha lezioni fissate');
+
+                  //ogni volta che viene cliccata una nuova data bisogna cambiare lo stato e svolgere una nuova call al db
+                  //bisogna convertire l'orario salvato sul db (che indica l'orario occupato)
+                  //e disabilitare le celle dell'orario cliccabili (ad esempio se nel db è salvato un appuntamento il
+                  //il 5 marzo alle 10:00: clicco 5 marzo sulla UI, fa una richiesta nel db per il 5 marzo con getDailyAppointments,
+                  //ottengo l'orario occupato dal db (le 10:00) e disabilito il tasto di prenotazione delle 10:00
+
               },
               builders: CalendarBuilders(
                 selectedDayBuilder: (context, date, events) => Container(
@@ -99,8 +143,8 @@ class _CalendarPageState extends State<CalendarPage> {
               ),
               calendarController: _controller,
             ),
-            TimePickerButton(lesson: lesson),
-            Center(
+            //TimePickerButton(lesson: lesson),
+             Center(
               child: RaisedButton(
                 onPressed: () {
                   Navigator.of(context).push(
@@ -115,6 +159,7 @@ class _CalendarPageState extends State<CalendarPage> {
               )
             )
           ],
+          
         ),
       ),
     );
@@ -125,6 +170,8 @@ class _CalendarPageState extends State<CalendarPage> {
 
 
 
+//FIFTH PAGE INTERACTING WITH FIREBASE 
+//FIFTH PAGE INTERACTING WITH FIREBASE 
 //FIFTH PAGE INTERACTING WITH FIREBASE 
 
 class PageChooseInstructor extends StatelessWidget {

@@ -21,6 +21,7 @@ class FirestoreSlideshow extends StatefulWidget {
    createState() => FirestoreSlideshowState();
 }
 
+
 class FirestoreSlideshowState extends State<FirestoreSlideshow> {
   final PageController ctrl = PageController(viewportFraction: 0.8); //to view not 100% but 80% of the screen
   final Firestore db = Firestore.instance;
@@ -62,7 +63,6 @@ class FirestoreSlideshowState extends State<FirestoreSlideshow> {
         );
       }
     );
-    //TODO
   }
 
   Stream _queryDb({ String tag = 'favorites'}){
@@ -89,15 +89,12 @@ class FirestoreSlideshowState extends State<FirestoreSlideshow> {
       margin: EdgeInsets.only(top: top, bottom: 50, right: 30),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-
         image: DecorationImage(
-            fit: BoxFit.cover,
-            image: NetworkImage(data['img']),
+          fit: BoxFit.cover,
+          image: NetworkImage(data['img']),
         ),
-
-        boxShadow: [BoxShadow(color: Colors.black87, blurRadius: blur, offset: Offset(offset, offset))]
+        boxShadow: [BoxShadow(color: Colors.black87, blurRadius: blur, offset: Offset(offset, offset))], 
       ),
-
     );
     }
 
@@ -108,18 +105,17 @@ class FirestoreSlideshowState extends State<FirestoreSlideshow> {
         crossAxisAlignment: CrossAxisAlignment.start,
       
         children: [
-          Text('Your Stories', style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),),
-          Text('FILTER', style: TextStyle( color: Colors.black26 )),
+          Text('Scegli il tuo Istruttore', style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),),
+          Text('GENERE', style: TextStyle( color: Colors.black26 )),
           _buildButton('favorites'),
           _buildButton('happy'),
-          _buildButton('sad')
         ],
       )
     );
   }
 
   _buildButton(tag) {
-  Color color = tag == activeTag ? Colors.purple : Colors.white;
+  Color color = tag == activeTag ? Colors.grey : Colors.white;
   return FlatButton(color: color, child: Text('#$tag'), onPressed: () => _queryDb(tag: tag));
   }
 }
