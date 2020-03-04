@@ -1,17 +1,6 @@
 /* import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class GetAppointments {
-  getDailyAppointments(String formattedDay) {
-    return Firestore.instance
-    .collection('appointments')
-    .where('data', isEqualTo: formattedDay)
-    .orderBy('data', descending: true)
-    .getDocuments();
-  }
-}
-
-
 class TimeSlotButtons extends StatefulWidget {
   @override
   _TimeSlotButtonsState createState() => _TimeSlotButtonsState();
@@ -21,38 +10,23 @@ class _TimeSlotButtonsState extends State<TimeSlotButtons> {
   var appointments;
   bool dailyAppointmentsFlag = false;
 
-  
-
   @override
-  void initState() {
-    super.initState();
-    GetAppointments().getDailyAppointments(formattedDay).then((QuerySnapshot docs) {
-      if(docs.documents.isNotEmpty) {
-        dailyAppointmentsFlag = true;
-        appointments = docs.documents[0].data;
-      }
-      else {
-        dailyAppointmentsFlag = false;
-      }
-    });
+  void initState() {};
+
+
+  setState((){});
+
+
+MaterialColor checkCorrespondence(int index, var timeTypes, var appointments){
+  setState((){
+  if (timeTypes[index] == appointments['ora']){
+    return Colors.red;
   }
+  else return Colors.grey;
+  });
+}
 
-
-  void checkAvailability(String formattedDay) {
-    setState((){
-      GetAppointments().getDailyAppointments(formattedDay).then((QuerySnapshot docs) {
-        if(docs.documents.isNotEmpty) {
-          dailyAppointmentsFlag = true;
-          appointments = docs.documents[0].data;
-        }
-        else {
-          dailyAppointmentsFlag = false;
-        }
-      });
-    });
-  }
-
-  final timeTypes = ["10:00 AM", "11:00 AM", "12:00 AM","1:00 PM","2:00 PM","3:00 PM" ]
+  final timeTypes = ["10:00", "11:00", "12:00","13:00","14:00","15:00" ];
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -66,6 +40,7 @@ class _TimeSlotButtonsState extends State<TimeSlotButtons> {
               primary: false,
               children: List.generate(timeTypes.length, (index){
                 return FlatButton(
+                  color: checkCorrespondence(index, timeTypes, appointments),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -87,29 +62,17 @@ class _TimeSlotButtonsState extends State<TimeSlotButtons> {
     );
   }
 }
-
-
-
-
-
-//questo va chiamato ogni volta che viene cambiato il giorno
-
-
-
-getYear(DateTime inputVal) {
-  String processedYear;
-  processedYear = inputVal.year.toString();
-  return processedYear;
-}
-
-getDay(DateTime inputVal) {
-  String processedDay;
-  processedDay = inputVal.day.toString();
-  return processedDay;
-}
-
-getTime(DateTime inputVal) {
-  String processedTime;
-  processedTime = inputVal.hour.toString();
-  return processedTime;
-}  */
+ */
+/*
+return GridView.count (
+  crossAxisCount: 3,
+  children: List.generate(6, (index) {
+    return new Card(
+      elevation: 8.0,
+      child: new Container(
+        child: new Text("$timeTypes[index]")
+      )
+    );
+  }
+)
+*/

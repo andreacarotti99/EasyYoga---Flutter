@@ -45,6 +45,8 @@ class _CalendarPageState extends State<CalendarPage> {
   _CalendarPageState({this.lesson});
   bool dailyAppointmentsFlag = false;
   var appointments;
+  final timeTypes = ["10:00", "11:00", "12:00","13:00","14:00","15:00" ];
+
 
   @override
   void initState() {
@@ -73,16 +75,28 @@ class _CalendarPageState extends State<CalendarPage> {
         else {
           dailyAppointmentsFlag = false;
         }
+        dailyAppointmentsFlag ? print(appointments['ora']) : print('Questo giorno non ha lezioni fissate');
       });
     });
   }
+
+  /*MaterialColor checkCorrespondence(int index, var timeTypes, var appointments) {
+  setState((){
+  if(docs.documents.isNotEmpty) {
+    if (timeTypes[index] == appointments['ora']){
+    return Colors.red;
+  }}
+  else return Colors.grey;
+  });
+}*/
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TableCalendar(
               initialCalendarFormat: CalendarFormat.week,
@@ -107,8 +121,6 @@ class _CalendarPageState extends State<CalendarPage> {
                 print(formattedDay);
                 //lesson.day = formattedDate;
                 checkAvailability(formattedDay);                
-
-                dailyAppointmentsFlag ? print(appointments['ora']) : print('Questo giorno non ha lezioni fissate');
 
                   //ogni volta che viene cliccata una nuova data bisogna cambiare lo stato e svolgere una nuova call al db
                   //bisogna convertire l'orario salvato sul db (che indica l'orario occupato)
@@ -143,14 +155,36 @@ class _CalendarPageState extends State<CalendarPage> {
               ),
               calendarController: _controller,
             ),
+
+            //Widget per il time picker
+            Expanded(
+              child: GridView.count (
+                crossAxisCount: 3,
+                children: List.generate(6, (index) {
+                  return new Card(
+                    elevation: 4.0,
+                    child: new Container(
+                      child: new Text(timeTypes[index])
+                    )
+                  );
+                })
+              )
+            ),
+             
+            
+
+
+
+
+
+
             //TimePickerButton(lesson: lesson),
              Center(
               child: RaisedButton(
                 onPressed: () {
                   Navigator.of(context).push(
                   new MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                      PageChooseInstructor (lesson: lesson,)));
+                    builder: (BuildContext context) => PageChooseInstructor (lesson: lesson,)));
                 },
                 child: Text(
                   'Prosegui',
@@ -159,7 +193,6 @@ class _CalendarPageState extends State<CalendarPage> {
               )
             )
           ],
-          
         ),
       ),
     );
