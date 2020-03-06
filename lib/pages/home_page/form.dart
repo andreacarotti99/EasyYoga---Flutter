@@ -49,7 +49,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                       PageYogaTypes(lesson: lesson,)));
               }
             },
-            
             child: Text('Verifica CAP'),
           )
         ]
