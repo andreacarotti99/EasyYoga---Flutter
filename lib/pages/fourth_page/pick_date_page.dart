@@ -184,7 +184,13 @@ class _CalendarPageState extends State<CalendarPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget> [
                   FlatButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      if (dailyAppointmentsFlag10 == true){
+                        Scaffold
+                          .of(context)
+                          .showSnackBar(SnackBar(content: Text('Orario selezionato non disponibile')));
+                      }
+                    },
                     child: Text('10:00'),
                     color: dailyAppointmentsFlag10 ? Colors.red : Colors.grey,
                   ),

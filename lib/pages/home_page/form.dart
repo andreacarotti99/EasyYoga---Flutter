@@ -33,9 +33,12 @@ class MyCustomFormState extends State<MyCustomForm> {
               if (value.isEmpty) {
                 return 'Perfavore inserisci un CAP valido';
               }
+              else{
+                print('$value');
+                lesson.cap = value;
+              }
               return null;
-            },
-            onSaved: (input) => lesson.cap = input,
+            }
           ),
           RaisedButton(
             onPressed: () {

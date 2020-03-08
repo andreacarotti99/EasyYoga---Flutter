@@ -7,6 +7,7 @@ class PageYogaTypes extends StatelessWidget {
 
   final Lesson lesson;
   PageYogaTypes({Key key, @required this.lesson}) : super (key: key);
+  String clickedType;
 
 
 
@@ -20,18 +21,22 @@ class PageYogaTypes extends StatelessWidget {
       List<dynamic> dataJSON = jsonDecode(dataString);
 
 
-      dataJSON.forEach((object) {
+      dataJSON.forEach((object) { 
 
         String finalString= "";
         List<dynamic> dataList = object["placeItems"];
         dataList.forEach((item){
           finalString = finalString + item;
         });
-
+        //per ogni elemento in json che possiedo in instructors costruisce un elemento
         items.add(Padding(padding: EdgeInsets.all(2.0),
         child: FlatButton(
-            onPressed: () => Navigator.of(context).push(
-            new MaterialPageRoute(builder: (BuildContext context) => TypeBeginnerYoga(lesson: lesson,))),
+            onPressed: () {
+              //salvo il tipo di yoga cliccato
+              clickedType = object["typeTitle"];
+              Navigator.of(context).push(
+              new MaterialPageRoute(builder: (BuildContext context) => TypeBeginnerYoga(lesson: lesson,)));
+            },
             child: Container(
             decoration: BoxDecoration(
               color: Colors.white,

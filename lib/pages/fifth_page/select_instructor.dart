@@ -93,15 +93,18 @@ class _FirestoreSlideshowState extends State<FirestoreSlideshow> {
     margin: EdgeInsets.only(top: top, bottom: 50, right: 30),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(20),
-
       image: DecorationImage(
           fit: BoxFit.cover,
           image: NetworkImage(data['img']),
       ),
-
-      boxShadow: [BoxShadow(color: Colors.black87, blurRadius: blur, offset: Offset(offset, offset))]
+      boxShadow: [BoxShadow(color: Colors.black87, blurRadius: blur, offset: Offset(offset, offset))],
     ),
-
+    child: Center(
+      child: RaisedButton(
+        onPressed: (){},
+        child: Text('Conferma istruttore')
+      ),
+    )
   );
   }
 
@@ -111,8 +114,8 @@ class _FirestoreSlideshowState extends State<FirestoreSlideshow> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Choose your Instructor', style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),),
-          Text('FILTER', style: TextStyle( color: Colors.black26 )),
+          Text('Scegli il tuo Istruttore', style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),),
+          Text('FILTRA', style: TextStyle( color: Colors.black26 )),
           _buildButton('favorites'),
           _buildButton('happy'),
           _buildButton('sad')
@@ -123,7 +126,11 @@ class _FirestoreSlideshowState extends State<FirestoreSlideshow> {
 
   _buildButton(tag) {
   Color color = tag == activeTag ? Colors.purple : Colors.white;
-  return FlatButton(color: color, child: Text('#$tag'), onPressed: () => _queryDb(tag: tag));
+  return FlatButton(
+    color: color,
+    child: Text('#$tag'),
+    onPressed: () => _queryDb(tag: tag)
+  );
   }
   
 }

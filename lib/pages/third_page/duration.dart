@@ -3,11 +3,13 @@ import 'package:yogaflutter/pages/third_page/image_banner.dart';
 import 'package:yogaflutter/models/lesson.dart';
 import 'package:yogaflutter/pages/fourth_page/pick_date_page.dart';
 import 'package:yogaflutter/pages/third_page/titolo.dart';
+import 'dart:convert';
 
 
 class TypeBeginnerYoga extends StatefulWidget {
   final Lesson lesson;
-  TypeBeginnerYoga({Key key, @required this.lesson}) : super(key: key);
+  TypeBeginnerYoga({Key key, @required this.lesson,}) : super(key: key);
+  
   @override
   _TypeBeginnerYoga createState() => _TypeBeginnerYoga(lesson: lesson);
 }
@@ -36,10 +38,29 @@ class _TypeBeginnerYoga extends State<TypeBeginnerYoga> {
 
   @override
   Widget build(BuildContext context) {
+
+    //Future<Scaffold> createPage() async {
+      //List<Widget> items = new List<Widget>();
+      //String dataString =
+        //  await DefaultAssetBundle.of(context).loadString("./load_json/instructors.json");
+      //List<dynamic> dataJSON = jsonDecode(dataString);
+      
+      //dataJSON.forEach((object) {
+        //if(object["typeTitle"] == /*titolo della casella cliccata*/ ) {
+          //display the image
+        //}
+      //});
+
+      
+
+
+
+
+
     return new Scaffold(
       appBar: new AppBar(backgroundColor: Colors.indigo[400],),
       body: new Center(
-        child: new ListView(
+        child: new ListView( 
           children: <Widget>[
           //Primo Widget: Immagine
           ImageBanner("./pictures/yoga_logo.jpg"),
@@ -143,10 +164,5 @@ class _TypeBeginnerYoga extends State<TypeBeginnerYoga> {
       )
     );
   }
+  //}
 }
-
-//secondo tipo (...)
-
-//terzo tipo(...)
-
-//quarto(...)
