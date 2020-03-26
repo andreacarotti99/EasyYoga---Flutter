@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:yogaflutter/pages/third_page/duration.dart';
+import 'package:yogaflutter/pages/third_page/third_page.dart';
 import 'package:yogaflutter/models/lesson.dart';
 import 'dart:convert';
 
 class PageYogaTypes extends StatelessWidget {
-
   final Lesson lesson;
   PageYogaTypes({Key key, @required this.lesson}) : super (key: key);
   String clickedType;
 
-
-
   @override
   Widget build(BuildContext context) {
-
     Future<List<Widget>> createList() async {
       List<Widget> items = new List<Widget>();
       String dataString =
           await DefaultAssetBundle.of(context).loadString("./load_json/instructors.json");
       List<dynamic> dataJSON = jsonDecode(dataString);
 
-
       dataJSON.forEach((object) { 
-
         String finalString= "";
         List<dynamic> dataList = object["placeItems"];
+
         dataList.forEach((item){
           finalString = finalString + item;
         });
@@ -34,6 +29,8 @@ class PageYogaTypes extends StatelessWidget {
             onPressed: () {
               //salvo il tipo di yoga cliccato
               clickedType = object["typeTitle"];
+              print(clickedType);
+              lesson.typeofyoga = clickedType;
               Navigator.of(context).push(
               new MaterialPageRoute(builder: (BuildContext context) => TypeBeginnerYoga(lesson: lesson,)));
             },
@@ -107,7 +104,6 @@ class PageYogaTypes extends StatelessWidget {
                       }
                     }),
           )
-
         ],
       ),
     );

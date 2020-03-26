@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 import 'package:yogaflutter/models/lesson.dart';
+import 'package:yogaflutter/pages/sixth_page/confirmation_page.dart';
+
 
 //FIFTH PAGE INTERACTING WITH FIREBASE 
 
@@ -101,7 +103,12 @@ class _FirestoreSlideshowState extends State<FirestoreSlideshow> {
     ),
     child: Center(
       child: RaisedButton(
-        onPressed: (){},
+        onPressed: (){
+
+          Navigator.of(context).push(
+            new MaterialPageRoute(builder: (BuildContext context) => ConfirmationPage()));
+
+        },
         child: Text('Conferma istruttore')
       ),
     )
@@ -116,16 +123,15 @@ class _FirestoreSlideshowState extends State<FirestoreSlideshow> {
         children: [
           Text('Scegli il tuo Istruttore', style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),),
           Text('FILTRA', style: TextStyle( color: Colors.black26 )),
-          _buildButton('favorites'),
-          _buildButton('happy'),
-          _buildButton('sad')
+          _buildButton('UOMO'),
+          _buildButton('DONNA')
         ],
       )
     );
   }
 
   _buildButton(tag) {
-  Color color = tag == activeTag ? Colors.purple : Colors.white;
+  Color color = tag == activeTag ? Colors.green : Colors.white;
   return FlatButton(
     color: color,
     child: Text('#$tag'),

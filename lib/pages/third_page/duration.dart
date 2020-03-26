@@ -8,7 +8,8 @@ import 'dart:convert';
 
 class TypeBeginnerYoga extends StatefulWidget {
   final Lesson lesson;
-  TypeBeginnerYoga({Key key, @required this.lesson,}) : super(key: key);
+  TypeBeginnerYoga({Key key, @required this.lesson}) : super(key: key);
+  
   
   @override
   _TypeBeginnerYoga createState() => _TypeBeginnerYoga(lesson: lesson);
@@ -19,7 +20,6 @@ class _TypeBeginnerYoga extends State<TypeBeginnerYoga> {
   Lesson lesson;
   _TypeBeginnerYoga({this.lesson}); 
   List<bool> isSelected1;
-  List<bool> isSelected2;
   @override
   void initState() {
     // TODO: implement initState
@@ -29,33 +29,10 @@ class _TypeBeginnerYoga extends State<TypeBeginnerYoga> {
       false,
       false,
     ];
-    isSelected2 = [
-      true,
-      false,
-      false,
-    ];
   }
 
   @override
   Widget build(BuildContext context) {
-
-    //Future<Scaffold> createPage() async {
-      //List<Widget> items = new List<Widget>();
-      //String dataString =
-        //  await DefaultAssetBundle.of(context).loadString("./load_json/instructors.json");
-      //List<dynamic> dataJSON = jsonDecode(dataString);
-      
-      //dataJSON.forEach((object) {
-        //if(object["typeTitle"] == /*titolo della casella cliccata*/ ) {
-          //display the image
-        //}
-      //});
-
-      
-
-
-
-
 
     return new Scaffold(
       appBar: new AppBar(backgroundColor: Colors.indigo[400],),
@@ -73,7 +50,7 @@ class _TypeBeginnerYoga extends State<TypeBeginnerYoga> {
                 padding: EdgeInsets.all(16.0),
                 child: Text(
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.',
-                  style: TextStyle(fontFamily: 'Montserrat', fontSize: 8),
+                  style: TextStyle(fontFamily: 'Montserrat', fontSize: 12),
                 ),
               )
             )
@@ -112,38 +89,6 @@ class _TypeBeginnerYoga extends State<TypeBeginnerYoga> {
             ),
          ),
 
-            //titolo durata
-          Titolo(titolo: 'Durata Lezione'),
-          new Container(
-            child: new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                    //build in a separated function
-                ToggleButtons(
-                  children: <Widget>[
-                    Text('1h'),
-                    Text('2h'),
-                    Text('3h'),
-                  ],
-                      isSelected: isSelected2,
-                      onPressed: (index) {
-                        
-                        setState(() {
-                          for (var i=0; i<isSelected2.length; i++) {
-                            if (i == index) {
-                              isSelected2[i] = true;
-                              lesson.duration = i.toString();
-                            } else {
-                              isSelected2[i] = false;
-                            }
-                          }
-                        });
-                      },
-                )
-                ]
-            ),
-          ),
-
             Center(
               child: RaisedButton(
                 onPressed: () {
@@ -164,5 +109,4 @@ class _TypeBeginnerYoga extends State<TypeBeginnerYoga> {
       )
     );
   }
-  //}
 }

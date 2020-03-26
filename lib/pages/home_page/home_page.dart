@@ -26,23 +26,9 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      /*bottomNavigationBar: BottomNavigationDotBar (
-        activeColor: Colors.black, 
-      items: <BottomNavigationDotBarItem>[
-        BottomNavigationDotBarItem(icon: Icons.settings, onTap: () => Navigator.of(context).push(
-          new MaterialPageRoute(
-            builder: (BuildContext context) => SettingsPage()))),
-        BottomNavigationDotBarItem(icon: Icons.edit, onTap: () {}),
-        BottomNavigationDotBarItem(icon: Icons.perm_identity , onTap: () {}),
-      ]
-      ),*/
       bottomNavigationBar: TitledBottomNavigationBar(
         reverse: true,
         inactiveStripColor: Colors.grey,
@@ -62,7 +48,6 @@ class _HomePageState extends State<HomePage> {
         ]
       ),
 
-      
         appBar: new AppBar(
           title: new Text("EasyYoga"),
           backgroundColor: Colors.indigo[400],
@@ -76,6 +61,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+        
       body: Center(
         child: Container(
           margin: const EdgeInsets.all(60.0),

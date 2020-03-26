@@ -4,7 +4,6 @@ class Instructor {
   String surname;
   String specialization;
   String age;
-  String color;
   String sumup;
 
   Instructor(
@@ -13,7 +12,6 @@ class Instructor {
     this.surname,
     this.specialization,
     this.age,
-    this.color,
     this.sumup,
   );
 }

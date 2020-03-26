@@ -9,13 +9,14 @@ import 'package:yogaflutter/pages/fifth_page/select_instructor.dart';
 
 
 class GetAppointments {
-  getDailyAppointments(String formattedDay) {
+  Future<QuerySnapshot> getDailyAppointments(String formattedDay) {
     return Firestore.instance
     .collection('appointments')
     .where('data', isEqualTo: formattedDay)
     .getDocuments();
   }
 }
+
 
 class PagePickDate extends StatelessWidget {
     final Lesson lesson;
@@ -100,6 +101,7 @@ class _CalendarPageState extends State<CalendarPage> {
         }
         setState((){});
         docs.documents.isNotEmpty ? print(appointments['ora']) : print('Questo giorno non ha lezioni fissate');
+        
       });
 
   }
@@ -107,6 +109,7 @@ class _CalendarPageState extends State<CalendarPage> {
   
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Center(
         child: Column(
