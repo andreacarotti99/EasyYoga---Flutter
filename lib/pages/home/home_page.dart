@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yogaflutter/services/auth.dart';
-import 'package:yogaflutter/pages/home_page/form.dart';
-import 'package:yogaflutter/pages/home_page/settings.dart';
+import 'package:yogaflutter/pages/home/form.dart';
+import 'package:yogaflutter/pages/home/settings.dart';
 import 'package:titled_navigation_bar/titled_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {

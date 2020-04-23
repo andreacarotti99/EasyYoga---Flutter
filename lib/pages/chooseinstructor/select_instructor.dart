@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 import 'package:yogaflutter/models/lesson.dart';
-import 'package:yogaflutter/pages/sixth_page/confirmation_page.dart';
+import 'package:yogaflutter/pages/orderdetails/confirmation_page.dart';
 
 
 //FIFTH PAGE INTERACTING WITH FIREBASE 
@@ -73,7 +73,7 @@ class _FirestoreSlideshowState extends State<FirestoreSlideshow> {
 
   Stream _queryDb({ String tag = 'favorites'}){
   //Make a query
-  Query query = db.collection('stories').where('tags', arrayContains: tag);
+  Query query = db.collection('instructors').where('tags', arrayContains: tag);
   //Map the documents to the data payload
   slides = query.snapshots().map((list) => list.documents.map((doc) => doc.data));
   //Update the active tag
@@ -88,6 +88,11 @@ class _FirestoreSlideshowState extends State<FirestoreSlideshow> {
   final double blur = active ? 30 : 0;
   final double offset = active ? 20 : 0;
   final double top = active ? 100 : 200;
+  final double topinside = active ? 230 : 0;
+  final double bottominside = active ? 0 : 0;
+
+
+
 
   return AnimatedContainer(
     duration: Duration(milliseconds: 500),
@@ -101,18 +106,36 @@ class _FirestoreSlideshowState extends State<FirestoreSlideshow> {
       ),
       boxShadow: [BoxShadow(color: Colors.black87, blurRadius: blur, offset: Offset(offset, offset))],
     ),
-    child: Center(
-      child: RaisedButton(
-        onPressed: (){
-
-          Navigator.of(context).push(
-            new MaterialPageRoute(builder: (BuildContext context) => ConfirmationPage()));
-
-        },
-        child: Text('Conferma istruttore')
-      ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        AnimatedContainer(
+          duration: Duration(milliseconds: 500),
+          margin: EdgeInsets.only(top: topinside, bottom: bottominside),
+          curve: Curves.easeOutQuint,
+          height: topinside,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white
+          ),
+          child: Center(
+            child: Container(
+              width: 100,
+              height: 100,
+              child: RaisedButton(
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => ConfirmationPage()));
+                },
+                child: Text('Prosegui')
+        ),
+            ),
+          ),
+        )
+      ],
     )
-  );
+    );
   }
 
   _buildTagPage() {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yogaflutter/pages/third_page/image_banner.dart';
 import 'package:yogaflutter/models/lesson.dart';
-import 'package:yogaflutter/pages/fourth_page/pick_date_page.dart';
-import 'package:yogaflutter/pages/third_page/titolo.dart';
+import 'package:yogaflutter/pages/whenlesson/pick_date_page.dart';
 import 'dart:convert';
 
 
@@ -40,9 +38,18 @@ class _TypeBeginnerYoga extends State<TypeBeginnerYoga> {
         child: new ListView( 
           children: <Widget>[
           //Primo Widget: Immagine
-          ImageBanner("./pictures/yoga_logo.jpg"),
+          //ImageBanner("./pictures/yoga_logo.jpg"),
           //Secondo Widget: titolo tipo di Yoga
-          Titolo(titolo: 'Beginners Yoga'),
+          Center(
+            child: Container(
+              
+                padding: EdgeInsets.all(16.0),
+                  child: Text(
+                  'Beginners Yoga',
+                  style: TextStyle(fontFamily: 'Montserrat', fontSize: 20),
+                ),
+            )
+          ),
           //Terzo Widget: Descrizione
           Center(
             child: Container(
@@ -57,7 +64,16 @@ class _TypeBeginnerYoga extends State<TypeBeginnerYoga> {
           ),
 
           //Titolo bottoni durata
-          Titolo(titolo: 'Numero di allievi'),
+          Center(
+            child: Container(
+              
+                padding: EdgeInsets.all(16.0),
+                  child: Text(
+                  'Numero di allievi',
+                  style: TextStyle(fontFamily: 'Montserrat', fontSize: 20),
+                ),
+            )
+          ),
 
           //Quarto Widget: Bottoni durata
           new Container(
@@ -89,22 +105,21 @@ class _TypeBeginnerYoga extends State<TypeBeginnerYoga> {
             ),
          ),
 
-            Center(
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                  new MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                      PagePickDate(lesson: lesson,)));
-                },
-                child: Text(
-                  'Prosegui',
-                  style: TextStyle(fontFamily: 'Montserrat', fontSize: 16)
-                  )
+        Center(
+          child: RaisedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+              new MaterialPageRoute(
+                builder: (BuildContext context) =>
+                  PagePickDate(lesson: lesson,)));
+            },
+            child: Text(
+              'Prosegui',
+              style: TextStyle(fontFamily: 'Montserrat', fontSize: 16)
               )
-            )
-
-          ]
+          )
+        )
+    ]
         )
       )
     );

@@ -8,6 +8,7 @@ class Lesson {
   String cap;
 
   Lesson(
+    
     this.duration,
     this.attendees,
     this.typeofyoga,
@@ -15,6 +16,7 @@ class Lesson {
     this.time,
     this.instructor,
     this.cap,
+    
   );
 
   Map<String, dynamic> toJson() => {

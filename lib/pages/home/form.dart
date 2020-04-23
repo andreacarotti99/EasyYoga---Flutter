@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yogaflutter/pages/second_page/tipi_di_yoga.dart';
+import 'package:yogaflutter/pages/typesofyogas/typesofyogas.dart';
 import 'package:yogaflutter/models/lesson.dart';
 
 class MyCustomForm extends StatefulWidget {
@@ -11,13 +11,11 @@ class MyCustomForm extends StatefulWidget {
 
 class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
-  final lesson = new Lesson(null, null, null, null, null, null, null);
+  final Lesson lesson = new Lesson(null, null, null, null, null, null, null);
   
   @override
   Widget build(BuildContext context) {
-    //passo il parametro newlesson dopo aver importato la classe lesson cosi posso trasportarlo tra una route e l'altra
     
-    // Build a Form widget using the _formKey created above.
     return Form(
       key: _formKey,
       child: Column(
@@ -48,8 +46,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                   .showSnackBar(SnackBar(content: Text('Verificando il CAP...')));
                 Navigator.of(context).push(
                   new MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                      PageYogaTypes(lesson: lesson,)));
+                    builder: (BuildContext context) => PageYogaTypes()));
               }
             },
             child: Text('Verifica CAP'),
